@@ -1,5 +1,16 @@
 import { Response } from 'express';
 import Category, { ICategory } from '../models/Category';
+import News from '../models/News';
+
+export const getAllNewsAndAllCateogries = async (req: any, res: Response): Promise<any> => {
+  try {
+    const news = await News.find().populate('category', 'name');
+    const categories = await Category.find();
+    res.json({ news, categories });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export const getCategories = async (req: any, res: Response): Promise<any> => {
   try {
@@ -51,6 +62,16 @@ export const deleteCategory = async (req: any, res: Response): Promise<any> => {
     const deletedCategory = await Category.findByIdAndDelete(req.params.id);
     if (!deletedCategory) return res.status(404).json({ message: 'Category not found' });
     res.json({ message: 'Category deleted successfully' });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getNewsByCategory = async (req: any, res: Response): Promise<any> => {
+  try {
+    const news = await News.find({ category: req.params.id }).populate('category', 'name');
+    if (!news || news.length === 0) return res.status(404).json({ message: 'No news found in this category' });
+    res.json(news);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }
