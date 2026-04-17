@@ -21,9 +21,11 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/news', newsRoutes);
 
 // Health check route
-app.get('/', (req: Request, res: Response) => {
-    res.send('API is running...');
+app.get('/', (_req: Request, res: Response) => {
+    res.json({ message: 'API is running...' });
 });
+
+
 
 // Database connection
 const PORT = process.env.PORT || 5001;
