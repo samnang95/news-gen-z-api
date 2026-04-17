@@ -15,9 +15,19 @@ export const protect = (req: AuthRequest, res: Response, next: NextFunction): an
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; // Adds user id to req object
+    req.user = decoded; // Adds user info to req object
     next();
   } catch (error) {
     res.status(401).json({ message: 'Token is not valid' });
+  }
+};
+
+// Middleware to check if user is strictly an Administrator
+export const adminOnly = (req: AuthRequest, res: Response, next: NextFunction): any => {
+  if (req.user && req.user.role === 'admin') {
+    next(); // They are admin, let them through
+  } else {
+    // 403 Forbidden
+    return res.status(403).json({ message: 'Access denied. Administrators only.' }); 
   }
 };

@@ -4,6 +4,7 @@ export interface IUser extends Document {
   username: string;
   email: string;
   passwordHash: string;
+  role: 'user' | 'admin';
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,6 +25,11 @@ const userSchema: Schema = new mongoose.Schema({
   passwordHash: {
     type: String,
     required: true
+  },
+  role: {
+    type: String,
+    enum: ['user', 'admin'],
+    default: 'user'
   }
 }, {
   timestamps: true // Automatically creates createdAt and updatedAt fields
