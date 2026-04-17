@@ -26,8 +26,13 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // Database connection
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/news-gen-z';
+const PORT = process.env.PORT || 5001;
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+  console.error('❌ FATAL ERROR: MONGO_URI is missing. Please define it in your .env file!');
+  process.exit(1);
+}
 
 mongoose.connect(MONGO_URI)
   .then(() => {
