@@ -11,9 +11,9 @@ import {
 
 const router = express.Router();
 
-router.get('/', protect, getNews);
-router.get('/:id', protect, getNewsById);
-router.get('/category/:categoryId', protect, getNewsByCategory);
+router.get('/', getNews);
+router.get('/:id', getNewsById);
+router.get('/category/:categoryId', getNewsByCategory);
 router.post('/', protect, adminOnly, createNews);
 router.put('/:id', protect, adminOnly, updateNews);
 router.delete('/:id', protect, adminOnly, deleteNews);

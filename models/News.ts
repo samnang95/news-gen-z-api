@@ -4,6 +4,7 @@ export interface INews extends Document {
   title: string;
   content: string;
   author: string;
+  imageUrl?: string;
   category: mongoose.Types.ObjectId; // References the Category model
   createdAt: Date;
   updatedAt: Date;
@@ -22,6 +23,10 @@ const newsSchema: Schema = new mongoose.Schema({
   author: {
     type: String,
     default: 'Anonymous'
+  },
+  imageUrl: {
+    type: String,
+    required: false
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,

@@ -7,6 +7,7 @@ import authRoutes from './routes/auth';
 import userRoutes from './routes/users';
 import categoryRoutes from './routes/categories';
 import newsRoutes from './routes/news';
+import imagekitRoutes from './routes/imagekit';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/news', newsRoutes);
+app.use('/api/imagekit', imagekitRoutes);
 
 // Health check route
 app.get('/', (_req: Request, res: Response) => {

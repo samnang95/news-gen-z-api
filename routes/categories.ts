@@ -12,10 +12,10 @@ import {
 
 const router = express.Router();
 
-router.get('/', protect, getCategories);
-router.get('/all', protect, getAllNewsAndAllCateogries);
-router.get('/:id', protect, getCategoryById);
-router.get('/:id/news', protect, getNewsByCategory);
+router.get('/', getCategories);
+router.get('/all', getAllNewsAndAllCateogries);
+router.get('/:id', getCategoryById);
+router.get('/:id/news', getNewsByCategory);
 router.post('/', protect, adminOnly, createCategory);
 router.put('/:id', protect, adminOnly, updateCategory);
 router.delete('/:id', protect, adminOnly, deleteCategory);
